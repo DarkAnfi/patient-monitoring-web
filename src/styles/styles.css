@@ -1,0 +1,136 @@
+
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    scroll-behavior: smooth;
+    overflow: hidden;
+    max-height: 100vh;
+    
+}
+
+h3 {
+    margin-top: 1px;
+    margin-bottom: 10px;
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.multiline-ellipsis-8-lines{
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.no-selectable {
+    user-select: none;
+}
+
+.italic {
+    font-style: italic;
+}
+
+button.gm-ui-hover-effect {
+    visibility: hidden;
+}
+
+/* animations */
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+  
+@-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+  
+@-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+  
+@-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+  
+@-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+
+
+
+
+/* ============================================== */
+
+.circular-chart {
+    position: absolute;
+    display: none;
+    margin: 0px;
+    width: 48px;
+    height: 48px;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.8;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    animation: progress 15s linear forwards;
+    stroke: #f52837;
+}
+
+.fade-in {
+    display: block;
+    animation: fadeIn 0.2s ease-in;
+    animation-iteration-count:1;
+}
+
+.fade-out {
+    opacity: 0;
+    animation: fadeOut 0.2s ease-out;
+    animation-iteration-count:1;
+}
+
+@keyframes progress {
+    0% {
+        stroke-dasharray: 0 100;
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1 }
+    100% { opacity: 0 }
+}
+
+/* ============================================== */
