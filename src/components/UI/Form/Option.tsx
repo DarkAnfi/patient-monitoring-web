@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, Radio, Switch } from '@mui/material';
+import { Checkbox, FormControlLabel, Radio, Switch } from '@material-ui/core';
 import React from 'react';
 
 export const FormOption: React.FC<FormOptionProps> = React.memo(({ type, value, name, label, disabled, onChange }) => {

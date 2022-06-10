@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, MenuItem } from '@mui/material';
+import { Button, MenuItem } from '@material-ui/core';
 import { ParsableDate } from '@material-ui/pickers/constants/prop-types';
 import { FileObject } from 'material-ui-dropzone';
 import validator from 'validator';

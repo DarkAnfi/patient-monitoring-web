@@ -1,4 +1,4 @@
-import { Box, BoxProps, Typography } from '@mui/material';
+import { Box, BoxProps, Typography } from '@material-ui/core';
 
 
 interface StickTableProps {

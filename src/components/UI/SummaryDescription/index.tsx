@@ -1,4 +1,4 @@
-import { makeStyles, Theme, Typography, useTheme } from "@mui/material";
+import { makeStyles, Theme, Typography, useTheme } from "@material-ui/core";
 import { v4 as uuid } from 'uuid';
 
 interface Props {

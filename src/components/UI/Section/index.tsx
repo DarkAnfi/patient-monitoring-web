@@ -1,4 +1,4 @@
-import { Box, BoxProps, Button, makeStyles, PropTypes, Theme, Typography, useTheme } from '@mui/material';
+import { Box, BoxProps, Button, makeStyles, PropTypes, Theme, Typography, useTheme } from '@material-ui/core';
 import { ButtonMenu } from 'components/UI/ButtonMenu';
 import React from 'react';
 

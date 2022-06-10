@@ -1,5 +1,5 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, Typography } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, Typography } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 
 interface TableModalProps {
     isOpen: boolean,

@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from "@material-ui/core";
 
 export const SplashScreen: React.FC = () => {
     return (

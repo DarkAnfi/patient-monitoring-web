@@ -1,5 +1,5 @@
 import { Page, Text, View, Document, StyleSheet, PDFViewer, Font } from '@react-pdf/renderer';
-import { Button, Icon, } from '@mui/material';
+import { Button, Icon, } from '@material-ui/core';
 import inconsolataLight from 'assets/font/inconsolata/static/Inconsolata/Inconsolata-Light.ttf';
 import inconsolataBold from 'assets/font/inconsolata/static/Inconsolata/Inconsolata-Bold.ttf';
 import { TableModal } from './TableModal';

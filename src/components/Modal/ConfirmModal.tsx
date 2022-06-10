@@ -1,5 +1,5 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, Theme, Typography, useTheme } from '@mui/material';
-import { Close, Error, Info, Warning } from '@mui/icons-material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, Typography, useTheme } from '@material-ui/core';
+import { Close, Error, Info, Warning } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeConfirmModal, resetConfirmModalState } from 'redux/actions/ui';
 
@@ -70,7 +70,7 @@ export const ConfirmModal: React.FC = () => {
     );
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     title: {
         width: '100%',
         margin: 0,

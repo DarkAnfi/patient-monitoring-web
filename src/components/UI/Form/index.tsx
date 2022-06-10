@@ -1,4 +1,4 @@
-import { FormHelperText } from '@mui/material';
+import { FormHelperText } from '@material-ui/core';
 import React, { Children, cloneElement, isValidElement, useImperativeHandle, useRef } from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Alert, Box, Button, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import validator from 'validator';
+import { Box, Button, makeStyles, Paper } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import { useForm } from 'hooks/useForm';
 import { startLogin } from 'redux/actions/auth';
 import { Form } from 'components/UI/Form';
@@ -16,6 +17,7 @@ const initialForm = {
     password: '' as string,
 };
 export const LoginScreen: React.FC = () => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const { error, isLoading } = useSelector<RootState, AuthState>(state => state.auth);
     const [formerror, setFormError] = useState(initialFormError);
@@ -29,7 +31,7 @@ export const LoginScreen: React.FC = () => {
     };
 
     return (
-        <Box className={`center-content`}>
+        <Box className={`center-content ${classes.root}`}>
             <Box className={classes.formBackground}></Box>
             <Paper className={`${classes.container}`} style={{ zIndex: 10 }}>
                 <Logo className={classes.logo} />
@@ -60,3 +62,63 @@ export const LoginScreen: React.FC = () => {
         </Box>
     );
 };
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        minHeight: '100vh',
+        backgroundColor: theme.palette.background.paper,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'right bottom',
+    },
+    logo: {
+        width: '100%',
+        // height: '300px',
+        marginTop: 15,
+        // marginBottom: 25,
+        fill: theme.palette.primary.main,
+    },
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '50%',
+        padding: '20px 40px',
+        backgroundColor: theme.palette.background.default,
+        [theme.breakpoints.down('xs')]: {
+            width: '90%',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '30%',
+        }
+    },
+    form: {
+        alignItems: 'center',
+        width: '100%',
+    },
+    formBackground: {
+        filter: theme.palette.type === 'dark' ? 'invert(1)' : 'initial',
+        width: '100%',
+        height: '100vh',
+        position: 'absolute',
+        backgroundColor: '#ffffff',
+        opacity: 0.75,
+    },
+    input: {
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    button: {
+        textTransform: 'none',
+        width: '50%',
+        marginTop: 25,
+        marginBottom: 10,
+    },
+    alert: {
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: 15,
+        marginBottom: 15,
+    }
+}));

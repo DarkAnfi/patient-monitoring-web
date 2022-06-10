@@ -1,5 +1,6 @@
+import { GridCellValue } from "@material-ui/data-grid";
 
-export const formatNumber = (amount: string | number, prefix = '$', sufix = '') => {
+export const formatNumber = (amount: string | number | GridCellValue, prefix = '$', sufix = '') => {
     const negative = parseInt(`${amount}`) < 0 ? '-' : '';
     return `${negative}${prefix}${Math.abs(parseInt(`${amount}`)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}${!!sufix ? ` ${sufix}` : ''}`;
 };

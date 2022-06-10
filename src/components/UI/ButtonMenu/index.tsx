@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, Divider, Icon, IconButton, ListItemIcon, Menu, MenuItem, PropTypes, Typography } from '@mui/material';
-import { MoreVert } from '@mui/icons-material';
+import { Box, Button, Divider, Icon, IconButton, ListItemIcon, Menu, MenuItem, PropTypes, Typography } from '@material-ui/core';
+import { MoreVert } from '@material-ui/icons';
 import { v4 as uuid } from 'uuid';
 
 export interface Option {
@@ -16,7 +16,7 @@ interface Props {
     size?: 'small' | 'medium' | 'large',
     text?: string,
     buttonVariant?: 'text' | 'outlined' | 'contained',
-    buttonColor?: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | "default" | undefined
+    buttonColor?: PropTypes.Color,
     buttonStyle?: React.CSSProperties,
     fullWidth?: boolean,
     disabled?: boolean,
@@ -46,7 +46,7 @@ export const ButtonMenu: React.FC<Props> = ({ options, icon, size = 'medium', te
                     fullWidth={fullWidth}
                     size={size}
                     variant={buttonVariant}
-                    color={buttonColor == 'default' ? 'primary' : buttonColor}
+                    color={buttonColor}
                     onClick={handleOpen}
                     style={buttonStyle}
                     disabled={disabled}
@@ -117,6 +117,7 @@ export const ButtonMenu: React.FC<Props> = ({ options, icon, size = 'medium', te
                 anchorEl={isOpen}
                 open={Boolean(isOpen)}
                 keepMounted
+                getContentAnchorEl={null}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right',

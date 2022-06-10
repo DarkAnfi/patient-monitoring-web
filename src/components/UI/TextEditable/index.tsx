@@ -1,6 +1,6 @@
 import { ChangeEventHandler, useCallback, useEffect, useState } from 'react';
-import { IconButton, TextField, TextFieldProps } from '@mui/material';
-import { Edit, Save } from '@mui/icons-material';
+import { IconButton, TextField, TextFieldProps } from '@material-ui/core';
+import { Edit, Save } from '@material-ui/icons';
 
 interface TextEditableProps {
     name: string;

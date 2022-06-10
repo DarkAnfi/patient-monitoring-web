@@ -1,7 +1,7 @@
-import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { makeStyles } from '@mui/material';
+import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core';
 
 export function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
   const classes = useStyles();

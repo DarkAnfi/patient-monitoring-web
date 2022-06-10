@@ -1,5 +1,5 @@
-import { IconButton } from "@mui/material";
-import { WhatsApp } from "@mui/icons-material";
+import { IconButton } from "@material-ui/core";
+import { WhatsApp } from "@material-ui/icons";
 
 export const WhatsAppButton: React.FC<{
   onClick: React.MouseEventHandler<HTMLButtonElement>;

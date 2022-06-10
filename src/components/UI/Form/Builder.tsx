@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { MenuItem } from '@mui/material';
+import { MenuItem } from '@material-ui/core';
 
 import { useForm } from 'hooks/useForm';
 import { Form, FormAttributes, FormProps } from '.';

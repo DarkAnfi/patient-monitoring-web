@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
-import { FormControlLabel, Switch } from '@mui/material';
+import { FormControlLabel, Switch } from '@material-ui/core';
 
 interface CustomSwitchProps {
     name: string;

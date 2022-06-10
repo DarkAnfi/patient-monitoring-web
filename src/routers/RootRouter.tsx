@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { Switch, Redirect } from 'react-router-dom';
+import { darken, alpha, lighten, makeStyles } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkingToken } from 'redux/actions/auth';
 import { PublicRoute } from 'routers/PublicRoute';
@@ -7,11 +9,9 @@ import { AuthRouter } from 'routers/AuthRouter';
 import { AppRouter } from './AppRouter';
 import { useNotifier } from 'hooks/useNotifier';
 import { SplashScreen } from 'screens/SplashScreen';
-import { Navigate, Routes, Route } from "react-router-dom";
-import { alpha, darken, lighten, makeStyles, Theme } from '@mui/material';
 
 export const RootRouter: React.FC = () => {
-    const classes = useStyles();
+    useStyles();
     useNotifier();
     const { user, checking, token } = useSelector<RootState, AuthState>(state => state.auth);
     const dispatch = useDispatch();
@@ -35,20 +35,20 @@ export const RootRouter: React.FC = () => {
 
     return (
         <div>
-            <Routes>
+            <Switch>
                 <PublicRoute path='/auth' component={AuthRouter} isAuthenticated={isAuth} />
                 <PrivateRoute path='/app' component={AppRouter} isAuthenticated={isAuth} />
-                <Route path="*" element={<Navigate to="/auth/login" replace />} />
-            </Routes>
+                <Redirect to='/auth/login' />
+            </Switch>
         </div>
     );
 };
 
-const useStyles = makeStyles((theme: Theme) => {
+const useStyles = makeStyles((theme) => {
 
-    const getBackgroundColor = (color: string, darkCoeficient: number, lightCoeficient: number) => theme.palette.mode === 'dark' ? alpha(color, darkCoeficient) : lighten(color, lightCoeficient);
+    const getBackgroundColor = (color: string, darkCoeficient: number, lightCoeficient: number) => theme.palette.type === 'dark' ? alpha(color, darkCoeficient) : lighten(color, lightCoeficient);
 
-    const getHoverBackgroundColor = (color: string, darkCoeficient: number, lightCoeficient: number) => theme.palette.mode === 'dark' ? alpha(color, darkCoeficient) : lighten(color, lightCoeficient);
+    const getHoverBackgroundColor = (color: string, darkCoeficient: number, lightCoeficient: number) => theme.palette.type === 'dark' ? alpha(color, darkCoeficient) : lighten(color, lightCoeficient);
 
     return {
         '@global': {
@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme: Theme) => {
             '.tableRow': {
                 display: 'table-row',
                 '&:hover .tableCol': {
-                    background: theme.palette.mode === 'dark' ? lighten(theme.palette.background.default, 0.1) : darken(theme.palette.background.default, 0.1),
+                    background: theme.palette.type === 'dark' ? lighten(theme.palette.background.default, 0.1) : darken(theme.palette.background.default, 0.1),
                 },
             },
             '.tableCol': {
@@ -115,7 +115,7 @@ const useStyles = makeStyles((theme: Theme) => {
                 position: 'relative',
                 textAlign: 'center',
                 '&:hover .tableCol': {
-                    background: theme.palette.mode === 'dark' ? lighten(theme.palette.background.default, 0.1) : darken(theme.palette.background.default, 0.1),
+                    background: theme.palette.type === 'dark' ? lighten(theme.palette.background.default, 0.1) : darken(theme.palette.background.default, 0.1),
                 },
             },
             '.tableHeader .tableCol': {

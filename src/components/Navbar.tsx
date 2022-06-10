@@ -1,17 +1,18 @@
 import clsx from 'clsx';
-import { AppBar, Box, IconButton, makeStyles, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Icon, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'redux/actions/auth';
 import { toggleMainMenu } from 'redux/actions/ui';
 import { ButtonMenu } from 'components/UI/ButtonMenu';
-import { Settings, ExitToApp, Menu } from '@mui/icons-material';
-// import { useNavigate } from 'react-router-dom';
-import { Theme } from '@mui/material';
+import { Settings } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
 export const Navbar: React.FC = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
+    const history = useHistory();
     const { user } = useSelector((state: RootState) => state.auth);
     const { breadcrumbs, isMainMenuOpen } = useSelector((state: RootState) => state.ui);
 
@@ -19,16 +20,12 @@ export const Navbar: React.FC = () => {
         dispatch(logout());
     };
 
-    // const toSettings = () => {
-    //     navigate('/app/settings');
-    // };
-
     return (
         <AppBar
             className={clsx(classes.appBar, {
                 [classes.appBarShift]: isMainMenuOpen,
             })}
-            position='fixed' 
+            position='fixed'
             style={{ zIndex: 1000 }}
         >
             <Toolbar className={classes.root}>
@@ -39,7 +36,7 @@ export const Navbar: React.FC = () => {
                         aria-label='open drawer'
                         onClick={() => dispatch(toggleMainMenu())}
                     >
-                        <Menu />
+                        <MenuIcon />
                     </IconButton>}
                 </Box>
                 <Box className={`ellipsis ${classes.title}`}>
@@ -48,21 +45,16 @@ export const Navbar: React.FC = () => {
                 <Box style={{ flex: 1 }}></Box>
                 <Box display='flex' alignItems='center'>
                     {user && <Typography style={{ marginRight: 5 }} variant='body1' noWrap>{user.name}</Typography>}
-                    <ButtonMenu
-                        icon={<Settings style={{ color: '#000000DE' }} />}
-                        options={[
-                            // { icon: <Icon>manage_accounts</Icon>, label: 'Gestionar Cuenta', onSelect: toSettings },
-                            // { label: 'divider' },
-                            { icon: <ExitToApp />, label: 'Cerrar Sesión', onSelect: handleLogout },
-                        ]}
-                    />
+                    <IconButton onClick={handleLogout} style={{ color: '#000000DE' }} >
+                        <ExitToAppIcon />
+                    </IconButton>
                 </Box>
             </Toolbar>
         </AppBar>
     );
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         justifyContent: 'space-between',

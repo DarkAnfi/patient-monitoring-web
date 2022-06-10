@@ -1,10 +1,11 @@
-import { createTheme } from "@mui/material";
-import { green, grey, orange, red } from "@mui/material/colors";
+import { createTheme } from '@material-ui/core';
+import { esES } from '@material-ui/core/locale';
+import { green, grey, orange, red } from '@material-ui/core/colors';
 
 export const getTheme = (isDarkActive: boolean) => {
   const theme = createTheme({
     palette: {
-      mode: 'dark',
+      type: 'dark',
       primary: {
         main: '#F2B100',// '#A88F1F',
       },
@@ -31,6 +32,6 @@ export const getTheme = (isDarkActive: boolean) => {
         paper: '#001935',
       }
     },
-  });
+  }, esES);
   return theme;
 };

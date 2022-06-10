@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Icon } from "@mui/material";
+import { Box, Button, Grid, Icon } from "@material-ui/core";
 import { useState } from "react";
 import { TableModal } from "./TableModal";
 

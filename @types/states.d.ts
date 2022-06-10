@@ -3,10 +3,6 @@ import { OptionsObject, SnackbarKey, SnackbarMessage } from "notistack";
 
 declare global {
 
-  interface SocketState {
-    connected: boolean;
-  }
-
   type ModalType = 'default' | 'info' | 'warning' | 'error';
 
   interface BasicModal {
@@ -65,8 +61,13 @@ declare global {
     error: AuthError;
   }
 
+  interface PatientState {
+    patients: Patient[]; // TODO: Crear interface
+  }
+
   interface RootState {
     ui: UIState;
     auth: AuthState;
+    patient: PatientState;
   }
 }

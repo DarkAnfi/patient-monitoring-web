@@ -1,4 +1,4 @@
-import { Box, BoxProps, makeStyles, Tab, Tabs, Theme, Typography } from '@mui/material';
+import { Box, BoxProps, makeStyles, Tab, Tabs, Theme, Typography } from '@material-ui/core';
 import { CSSProperties } from '@material-ui/styles';
 import { JSXElementConstructor, ReactElement, useMemo, useState, useEffect, Dispatch, SetStateAction } from 'react';
 

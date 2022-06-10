@@ -1,6 +1,6 @@
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, InputLabelProps, MenuItem, RadioGroup, Switch, TextField } from '@mui/material';
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, InputLabelProps, MenuItem, RadioGroup, Switch, TextField } from '@material-ui/core';
 import { KeyboardDatePicker, KeyboardDateTimePicker, KeyboardTimePicker } from '@material-ui/pickers';
-import { Schedule } from '@mui/icons-material';
+import { Schedule } from '@material-ui/icons';
 import { ParsableDate } from '@material-ui/pickers/constants/prop-types';
 import { DropzoneArea } from 'material-ui-dropzone';
 import React, { ChangeEvent, Children, cloneElement, isValidElement, useState } from 'react';

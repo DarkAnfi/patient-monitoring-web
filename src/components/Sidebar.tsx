@@ -1,15 +1,14 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Box, Divider, Drawer, IconButton, List, ListItem, ListItemText, makeStyles } from '@mui/material';
+import { Box, Divider, Drawer, Icon, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography } from '@material-ui/core';
 import { toggleMainMenu } from 'redux/actions/ui';
 import { ReactComponent as Logo } from 'assets/img/logos/logo_drawer.svg';
-import { Theme } from '@mui/material';
-import { ChevronLeft } from '@mui/icons-material';
+import { CustomAccordion } from './UI/CustomAccordion';
+import { ChevronLeft } from '@material-ui/icons';
 
 export const Sidebar: React.FC = () => {
     const classes = useStyles();
-    const { user } = useSelector((state: RootState) => state.auth);
     const { isMainMenuOpen } = useSelector((state: RootState) => state.ui);
     const dispatch = useDispatch();
 
@@ -50,7 +49,7 @@ export const Sidebar: React.FC = () => {
     );
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         width: 300,
         overflow: 'hidden',
