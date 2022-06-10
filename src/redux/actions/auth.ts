@@ -38,10 +38,10 @@ export const login = (user: any, token: string): SyncAction => ({
 
 export const logout = (): SyncAction => ({ type: auth.logout });
 
-const setLoading = (value: boolean): SyncAction => ({
-    type: auth.setLoading,
-    payload: value
-});
+// const setLoading = (value: boolean): SyncAction => ({
+//     type: auth.setLoading,
+//     payload: value
+// });
 
 export const error = (error: AuthError): SyncAction => ({
     type: auth.error,

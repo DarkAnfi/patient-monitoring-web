@@ -11,13 +11,12 @@ import { SnackbarProvider } from 'notistack';
 
 import { getTheme } from 'styles/theme';
 import { RootRouter } from 'routers/RootRouter';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const App = () => {
   const { isDarkActive } = useSelector<RootState, UIState>(state => state.ui);
   const theme = getTheme(isDarkActive);
   const classes = useStyles();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     localStorage.setItem('isDarkActive', JSON.stringify(isDarkActive));

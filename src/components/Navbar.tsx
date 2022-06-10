@@ -1,18 +1,14 @@
 import clsx from 'clsx';
-import { AppBar, Box, Icon, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Box, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'redux/actions/auth';
 import { toggleMainMenu } from 'redux/actions/ui';
-import { ButtonMenu } from 'components/UI/ButtonMenu';
-import { Settings } from '@material-ui/icons';
-import { useHistory } from 'react-router-dom';
 
 export const Navbar: React.FC = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const history = useHistory();
     const { user } = useSelector((state: RootState) => state.auth);
     const { breadcrumbs, isMainMenuOpen } = useSelector((state: RootState) => state.ui);
 
