@@ -27,10 +27,10 @@ export const SummaryDescription: React.FC<Props> = ({ columns, headerPercentage,
         const content: JSX.Element[] = [];
         Object.entries(column).forEach(([label, { value, fontSize, color, bold, italic, fontSizeValue, colorValue, boldValue, italicValue, children }]) => {
             content.push((<tr key={`summary-description-column-${uuid()}`}>
-                <td className={classes.labels} style={!!headerPercentage ? { width: `${headerPercentage}%` } : {}}>
+                <td className={classes.labels} style={!!headerPercentage ? { width: `calc(100vw * ${((headerPercentage) / 100)})` } : {}}>
                     <Typography style={{ ...getTextStyle(true, fontSize, color, bold, italic) }}>{label}</Typography>
                 </td>
-                <td className={classes.values} style={!!headerPercentage ? { width: `${100 - headerPercentage}%` } : {}}>
+                <td className={classes.values} style={!!headerPercentage ? { width: `calc(100vw * ${((100 - headerPercentage) / 100)})` } : {}}>
                     {
                         !!children ? children : (value !== null && value !== undefined)
                             ? <Typography style={{ ...getTextStyle(false, fontSizeValue, colorValue, boldValue, italicValue) }} title={value}>{value}</Typography>
@@ -77,10 +77,12 @@ const useStyles = makeStyles<Theme, styleProps>((theme) => ({
         }
     },
     labels: {
+        display: 'flex',
+        alignItems: 'flex-start',
         paddingRight: 10,
     },
     values: {
-        // whiteSpace: 'pre-wrap',
+        whiteSpace: 'pre-line',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
     },

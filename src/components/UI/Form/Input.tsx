@@ -118,7 +118,7 @@ export const _validate = ({ type, value, validate, min, max, required }: FormInp
   return result;
 };
 
-export const FormInput: React.FC<FormInputProps> = React.memo(({ inputsref, type = 'text', style, name, label, helper, placeholder, disabled, error, margin = 'normal', fullWidth = false, min, max, required = false, validate, formerror, value, onChange, children, variant = 'standard', placeholderSelect = true }) => {
+export const FormInput: React.FC<FormInputProps> = React.memo(({ inputsref, type = 'text', style, name, label, helper, placeholder, disabled, error, margin = 'normal', fullWidth = false, min, max, required = false, validate, formerror, value, onChange, children, variant = 'standard', placeholderSelect = true, acceptedFiles = ['image/*,.pdf'] }) => {
   const classes = useStyle();
   let _value: [string, any][];
   let _onChange: (event: ChangeEvent<any>) => void;
@@ -379,7 +379,7 @@ export const FormInput: React.FC<FormInputProps> = React.memo(({ inputsref, type
             clearOnUnmount
           /> */}
           <DropzoneArea
-            acceptedFiles={['image/*']}
+            acceptedFiles={acceptedFiles}
             dropzoneText={label}
             filesLimit={max as number}
             initialFiles={value as File[]}
@@ -419,6 +419,7 @@ export interface FormInputProps {
   formerror?: React.MutableRefObject<Dict<string>>;
   inputsref?: React.MutableRefObject<Dict<any>>;
   variant?: 'standard' | 'filled' | 'outlined';
+  acceptedFiles?: string[];
   InputLabelProps?: InputLabelProps;
   onChange?: (event: ChangeEvent<any>) => void;
   validate?: (value: string | number | boolean | Dict<boolean> | File[]) => string;

@@ -10,10 +10,12 @@ import { createPatient, deletePatient, updatePatient } from 'redux/actions/patie
 import { openConfirmModal, setConfirmModalState } from 'redux/actions/ui';
 import { v4 } from 'uuid';
 import { closeConfirmModal } from '../../redux/actions/ui';
+import { useHistory } from 'react-router-dom';
 
 export const HomeScreen: React.FC = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const { patients } = useSelector<RootState, PatientState>(state => state.patient);
 
     const rows = patients.map((patient) => ({
@@ -73,8 +75,8 @@ export const HomeScreen: React.FC = () => {
     }, [dispatch]);
 
     const onNavigate = useCallback((row: Row) => {
-
-    }, []);
+        history.push(`/app/patient-follow-up/${row._id}`);
+    }, [history]);
 
     const headersTable = {
         name: { type: 'text', label: 'Nombre', width: 300 },
@@ -105,7 +107,7 @@ export const HomeScreen: React.FC = () => {
             <Section label='Pacientes' actions={[
                 { label: 'Ingresar', materialColor: 'primary', icon: <Add />, onClick: onAdd }
             ]}>
-                <Box width='100%' position='relative'>
+                <Box width='100%'>
                     <TableCustom rows={rows} title='Pacientes' headersTable={headersTable} configTable={configTable} loading={false} height={650} />
                 </Box>
             </Section>
@@ -130,12 +132,18 @@ const AddPatientModal: React.FC = () => {
     const dispatch = useDispatch();
 
     const onSubmit = useCallback((form: PatientForm) => {
-        dispatch(createPatient({
+        const patient = {
             ...form,
             _id: v4(),
             age: parseInt(form.age),
-            events: []
-        }));
+            events: [({
+                _id: '1',
+                type: 'entry',
+                data: null,
+                datetime: new Date(),
+            } as PatientEvent<null>)]
+        };
+        dispatch(createPatient(patient));
         dispatch(closeConfirmModal());
     }, [dispatch]);
 

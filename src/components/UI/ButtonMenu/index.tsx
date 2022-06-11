@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 export interface Option {
     icon?: JSX.Element,
     label?: string,
+    disabled?: boolean,
     onSelect?: Function,
     component?: string | React.ReactChild,
 }
@@ -72,7 +73,7 @@ export const ButtonMenu: React.FC<Props> = ({ options, icon, size = 'medium', te
     //  Renderización de opciones del menu desplegable.
     const renderMenuOptions = () => {
         if (options && options.length) {
-            return options.map(({ icon, label = '', onSelect, component }, index) => {
+            return options.map(({ icon, label = '', onSelect, component, disabled = false }, index) => {
                 if (label === 'divider') {
                     return (<Box
                         key={`option-divider-${uuid()}`}
@@ -84,9 +85,9 @@ export const ButtonMenu: React.FC<Props> = ({ options, icon, size = 'medium', te
                         <Divider />
                     </Box>);
                 } else if (!!component) {
-                    return (<MenuItem key={`option-${index}-${label}`} onClick={(e) => handleSelect(e, onSelect)}> {component} </MenuItem>);
+                    return (<MenuItem key={`option-${index}-${label}`} onClick={(e) => handleSelect(e, onSelect)} disabled={disabled}> {component} </MenuItem>);
                 }
-                return (<MenuItem key={`option-${index}-${label}`} onClick={(e) => handleSelect(e, onSelect)}>
+                return (<MenuItem key={`option-${index}-${label}`} onClick={(e) => handleSelect(e, onSelect)} disabled={disabled}>
                     {
                         icon
                             ? <ListItemIcon>

@@ -15,5 +15,45 @@ interface Patient {
   derivedFrom: string;
   reason: string;
   observation: string;
-  events: Dict[];
+  events: PatientEvent[];
+}
+
+interface PatientEvent<T = any> {
+  _id: string;
+  type: 'entry' | 'studies' | 'biopsy' | 'oncological-committee' | 'pavilion' | 'follow-ups';
+  data: T;
+  datetime: Date;
+}
+
+interface Studies {
+  images: File[];
+  exams: File[];
+}
+
+interface Biopsy {
+  detail: string;
+  results: File[];
+}
+
+interface OncologicalCommittee {
+  detail: string;
+}
+
+interface Pavilion {
+  intervention: string;
+  docs: File[];
+  complications: string;
+}
+
+interface FollowUps {
+  controlTwoWeeks: MedicalControl;
+  controlOneMonth: MedicalControl;
+  controlThreeMonths: MedicalControl;
+  controlSixMonths: MedicalControl;
+  controlOneYear: MedicalControl;
+}
+
+interface MedicalControl {
+  detail: string;
+  files?: [];
 }

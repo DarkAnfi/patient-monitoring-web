@@ -13,7 +13,9 @@ declare global {
         isAuthenticated: boolean;
     } & RouteProps;
 
-    type UrlParams = {};
+    type UrlParams = {
+        patientId?: string;
+    };
 
     interface Summary {
         value?: string;

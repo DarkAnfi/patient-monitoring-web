@@ -14,6 +14,7 @@ import { Sidebar } from 'components/Sidebar';
 import { makeStyles } from '@material-ui/styles';
 import { Footer } from 'components/Footer';
 import { HomeScreen } from 'screens/App/HomeScreen';
+import { PatientFollowUpScreen } from 'screens/App/PatientFollowUpScreen';
 
 export const AppRouter: React.FC = () => {
     const classes = useStyles();
@@ -58,6 +59,7 @@ export const AppRouter: React.FC = () => {
                     <div style={paddingEnable ? { paddingTop: 20, paddingLeft: 20, paddingRight: 20, paddingBottom: 40 } : {}}>
                         <Switch>
                             <Route exact path='/app/home' component={HomeScreen} />
+                            <Route exact path='/app/patient-follow-up/:patientId' component={PatientFollowUpScreen} />
                             <Redirect to='/app/home' />
                         </Switch>
                     </div>
