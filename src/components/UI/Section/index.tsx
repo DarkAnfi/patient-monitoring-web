@@ -50,7 +50,8 @@ const renderActions = (theme: Theme, actions?: Action[]) => {
                         style={{
                             // color: variant === 'contained' ? theme.palette.getContrastText(actions[0].color ?? theme.palette.text.primary) : actions[0].color ?? '', 
                             borderColor: actions[0].color ?? '', 
-                            backgroundColor:  variant === 'contained' ? actions[0].color ?? '' : '' }}
+                            backgroundColor:  variant === 'contained' ? actions[0].color ?? '' : '',
+                        }}
                         variant={variant}
                         onClick={actions[0].onClick}
                         startIcon={actions[0].icon}

@@ -24,7 +24,7 @@ export const Footer = () => {
             style={{ backgroundColor: theme.palette.primary.main, color: theme.palette.getContrastText(theme.palette.primary.main) }}
         >
             <Typography style={{ fontSize: 10 }}>
-                GART { moment(new Date()).format('yyyy') } Copyright © Todos los derechos reservados
+               Patient Monitoring { moment(new Date()).format('yyyy') } Copyright © Todos los derechos reservados
             </Typography>
         </Box>
     )

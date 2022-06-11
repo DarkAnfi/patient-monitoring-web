@@ -41,7 +41,7 @@ export const Navbar: React.FC = () => {
                 <Box style={{ flex: 1 }}></Box>
                 <Box display='flex' alignItems='center'>
                     {user && <Typography style={{ marginRight: 5 }} variant='body1' noWrap>{user.name}</Typography>}
-                    <IconButton onClick={handleLogout} style={{ color: '#000000DE' }} >
+                    <IconButton onClick={handleLogout} color='inherit' >
                         <ExitToAppIcon />
                     </IconButton>
                 </Box>

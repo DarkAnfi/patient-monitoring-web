@@ -1,35 +1,48 @@
 import { createTheme } from '@material-ui/core';
 import { esES } from '@material-ui/core/locale';
-import { green, grey, orange, red } from '@material-ui/core/colors';
 
 export const getTheme = (isDarkActive: boolean) => {
   const theme = createTheme({
     palette: {
-      type: 'dark',
+      type: 'light',
       primary: {
-        main: '#F2B100',// '#A88F1F',
+        main: '#00796b',
+        light: '#48a999',
+        dark: '#004c40',
+
       },
       secondary: {
-        main: '#F2C23E',// '#C3B46F',
+        main: '#546e7a',
+        light: '#819ca9',
+        dark: '#29434e',
       },
       success: {
-        main: green[400],
+        main: '#2e7d32',
+        light: '#60ad5e',
+        dark: '#005005',
       },
       info: {
-        main: grey[400],
+        main: '#00acc1',
+        light: '#5ddef4',
+        dark: '#007c91',
       },
       warning: {
-        main: orange[400],
+        main: '#f57c00',
+        light: '#ffad42',
+        dark: '#bb4d00',
       },
       error: {
-        main: red[400],
+        main: '#e53935',
+        light: '#ff6f60',
+        dark: '#ab000d',
       },
       text: {
-        primary: '#F4F4F4',
+        primary: '#212121',
+        secondary: '#263238',
       },
       background: {
-        default: '#001935',
-        paper: '#001935',
+        default: '#fafafa',
+        paper: '#eceff1',
       }
     },
   }, esES);

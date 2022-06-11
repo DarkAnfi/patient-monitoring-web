@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Box, Divider, Drawer, IconButton, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
 import { toggleMainMenu } from 'redux/actions/ui';
-import { ReactComponent as Logo } from 'assets/img/logos/logo_drawer.svg';
+// import { ReactComponent as Logo } from 'assets/img/logos/logo_drawer.svg';
 import { ChevronLeft } from '@material-ui/icons';
 
 export const Sidebar: React.FC = () => {
@@ -26,8 +26,7 @@ export const Sidebar: React.FC = () => {
         >
             <List className={classes.root}>
                 <Box className={classes.drawerHeader} display='flex' alignItems='center' justifyContent='space-between' height='64px' paddingLeft='10px' paddingRight='10px'>
-                    <Logo className={classes.logo} />
-                    {/* <Typography variant='h6' color='primary'>GART</Typography> */}
+                    {/* <Logo className={classes.logo} /> */}
                     <IconButton onClick={handleToggleDrawer}>
                         <ChevronLeft />
                     </IconButton>

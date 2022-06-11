@@ -243,7 +243,7 @@ export default function TableCustom({ headersTable,
                         <Grid item>
                             <Grid container wrap='wrap' spacing={1} alignItems='center'>
                                 {!!legend && !!legend.length && <Grid item><GridToolbarLegend legend={legend} /></Grid>}
-                                <Grid item><ButtonPDF rows={rows} title={title} headers={headersTable} columnsSummaryDescription={columnsSummaryDescription} fontSize={pdfTableFontSize} /></Grid>
+                                {!configTable.disablePDFButton && <Grid item><ButtonPDF rows={rows} title={title} headers={headersTable} columnsSummaryDescription={columnsSummaryDescription} fontSize={pdfTableFontSize} /></Grid>}
                                 {!!headerButtons && <Grid item>{headerButtons}</Grid>}
                             </Grid>
                         </Grid>

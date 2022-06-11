@@ -6,7 +6,7 @@ import { Alert } from '@material-ui/lab';
 import { useForm } from 'hooks/useForm';
 import { startLogin } from 'redux/actions/auth';
 import { Form } from 'components/UI/Form';
-import { ReactComponent as Logo } from 'assets/img/logos/logo_login.svg';
+// import { ReactComponent as Logo } from 'assets/img/logos/logo_login.svg';
 
 //  Routes:
 //  /auth/login
@@ -34,7 +34,7 @@ export const LoginScreen: React.FC = () => {
         <Box className={`center-content ${classes.root}`}>
             <Box className={classes.formBackground}></Box>
             <Paper className={`${classes.container}`} style={{ zIndex: 10 }}>
-                <Logo className={classes.logo} />
+                {/* <Logo className={classes.logo} /> */}
                 <Form form={form} onChange={handleInputChange} onSubmit={onSubmit}
                     error={formerror.name} helper={formerror.message}
                     className={`flex-column ${classes.form}`}

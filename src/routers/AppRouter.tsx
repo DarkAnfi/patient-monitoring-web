@@ -5,7 +5,6 @@ import am4themes_amchartsdark from '@amcharts/amcharts4/themes/dark';
 import { useRef, useEffect, useLayoutEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import { HomeScreen } from 'screens/App/HomeScreen';
 import { InfoModal } from 'components/Modal/InfoModal';
 import { ConfirmModal } from 'components/Modal/ConfirmModal';
 import { BreadcrumbsCustom } from 'components/Breadcrumbs';
@@ -14,6 +13,7 @@ import { Navbar } from 'components/Navbar';
 import { Sidebar } from 'components/Sidebar';
 import { makeStyles } from '@material-ui/styles';
 import { Footer } from 'components/Footer';
+import { HomeScreen } from 'screens/App/HomeScreen';
 
 export const AppRouter: React.FC = () => {
     const classes = useStyles();
