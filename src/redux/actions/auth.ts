@@ -6,8 +6,8 @@ export const startLogin = (email: string, password: string): AsyncAction => {
         // dispatch(setLoading(true));
         dispatch(login({
             _id: 'asdasd',
-            rut: '19717817',
-            name: 'Andrés Flores',
+            rut: '11111111',
+            name: 'Ruperto Salazar',
             phone: '+56900000000',
             email: 'example@gmail.com',
         }, 'asdasd'));
@@ -20,8 +20,8 @@ export const checkingToken = (): AsyncAction => {
         if (token) {
             dispatch(login({
                 _id: 'asdasd',
-                rut: '19717817',
-                name: 'Andrés Flores',
+                rut: '11111111',
+                name: 'Ruperto Salazar',
                 phone: '+56900000000',
                 email: 'example@gmail.com',
             }, 'asdasd'));
