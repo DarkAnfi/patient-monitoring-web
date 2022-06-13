@@ -114,7 +114,7 @@ export const _validate = ({ type, value, validate, min, max, required }: FormInp
       break;
   }
   if (!!result) return result;
-  result = !!validate ? validate(_value) : '';
+  result = !!validate ? (validate as Function)(_value) : '';
   return result;
 };
 
@@ -127,7 +127,7 @@ export const FormInput: React.FC<FormInputProps> = React.memo(({ inputsref, type
   if (!!inputsref) {
     inputsref.current[`${name}`] = {
       reset: () => {
-        setErrorMessage(preErrorMessage)
+        setErrorMessage(preErrorMessage);
       }
     };
   }
@@ -422,7 +422,7 @@ export interface FormInputProps {
   acceptedFiles?: string[];
   InputLabelProps?: InputLabelProps;
   onChange?: (event: ChangeEvent<any>) => void;
-  validate?: (value: string | number | boolean | Dict<boolean> | File[]) => string;
+  validate?: ((value: string) => string) | ((value: number) => string) | ((value: boolean) => string) | ((value: Dict<boolean>) => string) | ((value: File[]) => string);
 }
 
 const useStyle = makeStyles((theme) => ({

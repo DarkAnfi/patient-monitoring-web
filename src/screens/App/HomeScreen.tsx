@@ -151,19 +151,19 @@ const AddPatientModal: React.FC = () => {
         <>
             <Form form={form} onChange={handleInputChange} id='add-patient-form' onSubmit={onSubmit}>
                 <Form.Input label='Nombre' type='text' max={255} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}
                 />
                 <Form.Input label='Edad' type='numeric' max={2} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}
                 />
                 <Form.Input label='Previsión' type='select' placeholder='Seleccione tipo de previsión' fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value || value === 'placeholder') return 'El campo es requerido';
                         return '';
                     }}
@@ -175,25 +175,25 @@ const AddPatientModal: React.FC = () => {
                     <MenuItem value='Isapre'>Isapre</MenuItem>
                 </Form.Input>
                 <Form.Input label='Derivado desde' type='text' max={255} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}
                 />
                 <Form.Input label='Razón de derivación' type='text' max={255} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}
                 />
                 <Form.Input label='Antecedentes médicos' type='textarea' max={2000} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}
                 />
                 <Form.Input label='Breve historia clinica' type='textarea' max={2000} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}
@@ -232,20 +232,20 @@ const EditPatientModal: React.FC<EditPatientModalProps> = ({ patient }) => {
         <>
             <Form form={form} onChange={handleInputChange} id='edit-patient-form' onSubmit={onSubmit}>
                 <Form.Input label='Nombre' type='text' max={255} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}
                 />
                 <Form.Input label='Edad' type='numeric' fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         if ((value as string).length > 2) return 'Debe tener un largo menor o igual a 2.';
                         return '';
                     }}
                 />
                 <Form.Input label='Previsión' type='select' placeholder='Seleccione tipo de previsión' fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value || value === 'placeholder') return 'El campo es requerido';
                         return '';
                     }}
@@ -257,25 +257,25 @@ const EditPatientModal: React.FC<EditPatientModalProps> = ({ patient }) => {
                     <MenuItem value='Isapre'>Isapre</MenuItem>
                 </Form.Input>
                 <Form.Input label='Derivado desde' type='text' max={255} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}
                 />
                 <Form.Input label='Razón de derivación' type='text' max={255} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}
                 />
                 <Form.Input label='Antecedentes médicos' type='textarea' max={2000} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}
                 />
                 <Form.Input label='Breve historia clinica' type='textarea' max={2000} fullWidth
-                    validate={(value) => {
+                    validate={(value:string) => {
                         if (!value) return 'El campo es requerido';
                         return '';
                     }}

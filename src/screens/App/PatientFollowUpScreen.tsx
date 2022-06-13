@@ -1,4 +1,4 @@
-import { Avatar, Box, Step, StepContent, StepLabel, Stepper, Typography } from '@material-ui/core';
+import { Avatar, Box, IconButton, MenuItem, Step, StepContent, StepLabel, Stepper, Typography } from '@material-ui/core';
 import { Section } from 'components/UI/Section';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router';
@@ -9,8 +9,9 @@ import { ButtonMenu } from 'components/UI/ButtonMenu';
 import { closeConfirmModal, enqueueSnackbar, openConfirmModal, setConfirmModalState } from 'redux/actions/ui';
 import { Form } from 'components/UI/Form';
 import { useForm } from 'hooks/useForm';
-import { updatePatient } from '../../redux/actions/patients';
+import { deletePatientEvent, updatePatient, updatePatientEvent } from '../../redux/actions/patients';
 import { v4 } from 'uuid';
+import { Delete, Edit } from '@material-ui/icons';
 
 export const PatientFollowUpScreen = () => {
   const { patientId } = useParams<UrlParams>();
@@ -58,7 +59,7 @@ export const PatientFollowUpScreen = () => {
     }));
     dispatch(openConfirmModal());
   }, [dispatch, patient]);
-  
+
   const onAddOncologicalCommittee = useCallback(() => {
     if (!patient) return;
     dispatch(setConfirmModalState({
@@ -99,6 +100,26 @@ export const PatientFollowUpScreen = () => {
     dispatch(openConfirmModal());
   }, [dispatch, patient]);
 
+  const onAddFollowUps = useCallback(() => {
+    if (!patient) return;
+    dispatch(setConfirmModalState({
+      title: 'Agregar Información de Seguimiento',
+      fullWidth: true,
+      size: 'sm',
+      content: <AddFollowUpsModal patient={patient} />,
+      onConfirm: () => {
+        const form = document.querySelector<HTMLFormElement>(`#add-follow-ups-form`);
+        if (!form) return false;
+        form.dispatchEvent(new Event('submit', {
+          'bubbles': true,
+          'cancelable': true,
+        }));
+        return false;
+      }
+    }));
+    dispatch(openConfirmModal());
+  }, [dispatch, patient]);
+
   const eventOptionsDict = useMemo(() => {
     return {
       'entry': { label: 'Ingreso', onSelect: () => console.log('entry') },
@@ -106,17 +127,38 @@ export const PatientFollowUpScreen = () => {
       'biopsy': { label: 'Biopsia', onSelect: onAddBiopsy },
       'oncological-committee': { label: 'Comité Oncológico', onSelect: onAddOncologicalCommittee },
       'pavilion': { label: 'Pabellón', onSelect: onAddPavilion },
-      'follow-ups': { label: 'Seguimiento', onSelect: () => console.log('follow-ups') },
-    }
-  }, [onAddStudies, onAddBiopsy, onAddOncologicalCommittee, onAddPavilion]);
+      'follow-ups': { label: 'Seguimiento', onSelect: onAddFollowUps },
+    };
+  }, [onAddStudies, onAddBiopsy, onAddOncologicalCommittee, onAddPavilion, onAddFollowUps]);
 
-  if (!patient || (!!patient && !patient.events.length)) return <Redirect to={'/app/home'} />
+  if (!patient || (!!patient && !patient.events.length)) return <Redirect to={'/app/home'} />;
 
   const renderStepperTitle = (event: PatientEvent) => {
-    return <Box>
-      <Typography variant='body2' style={{ fontWeight: 'bold' }}>{`${eventOptionsDict[event.type] ? eventOptionsDict[event.type].label : 'Evento Desconocido'}`}</Typography>
-      <Typography variant='body2'>{`${!!event.datetime ? `${moment(new Date(event.datetime)).format('DD-MM-yyyy [a las] HH:mm')}` : ''}`}</Typography>
-    </Box>
+
+    const onDelete: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+      e.preventDefault();
+      dispatch(deletePatientEvent(patient._id, event));
+      e.stopPropagation();
+    };
+
+    return <Box display='flex' justifyContent='space-between'>
+      <Box>
+        <Typography variant='body2' style={{ fontWeight: 'bold' }}>{`${eventOptionsDict[event.type] ? eventOptionsDict[event.type].label : 'Evento Desconocido'}`}</Typography>
+        <Typography variant='body2'>{`${!!event.datetime ? `${moment(new Date(event.datetime)).format('DD-MM-yyyy [a las] HH:mm')}` : ''}`}</Typography>
+      </Box>
+      <Box>
+        {event.type !== 'entry' &&
+          <IconButton>
+            <Edit />
+          </IconButton>
+        }
+        {event.type !== 'entry' &&
+          <IconButton onClick={onDelete}>
+            <Delete />
+          </IconButton>
+        }
+      </Box>
+    </Box>;
   };
 
   const renderFilePreview = (file: File) => {
@@ -166,12 +208,16 @@ export const PatientFollowUpScreen = () => {
 
       case 'studies':
         return (<Box display='flex' flexWrap='wrap'>
-          <Section label='Estudio Imágenes' style={{ width: '100%' }}>
-            {(event.data as Studies).images.map((image) => renderFilePreview(image)).filter((i) => !!i)}
-          </Section>
-          <Section label='Exámenes Generales' style={{ width: '100%' }}>
-            {(event.data as Studies).exams.map((exam) => renderFilePreview(exam)).filter((i) => !!i)}
-          </Section>
+          {!!event.data.images.length &&
+            <Section label='Estudio Imágenes' style={{ width: '100%' }}>
+              {(event.data as Studies).images.map((image) => renderFilePreview(image)).filter((i) => !!i)}
+            </Section>
+          }
+          {!!event.data.exams.length &&
+            <Section label='Exámenes Generales' style={{ width: '100%' }}>
+              {(event.data as Studies).exams.map((exam) => renderFilePreview(exam)).filter((i) => !!i)}
+            </Section>
+          }
         </Box>);
 
       case 'biopsy':
@@ -183,29 +229,48 @@ export const PatientFollowUpScreen = () => {
             {(event.data as Biopsy).results.map((result) => renderFilePreview(result)).filter((i) => !!i)}
           </Section>
         </Box>);
-      
+
       case 'oncological-committee':
         return (<Box display='flex' flexWrap='wrap'>
           <Section label='Detalle Comité Oncológico' style={{ width: '100%' }}>
             <Typography style={{ whiteSpace: 'pre-line' }}>{(event.data as OncologicalCommittee).detail}</Typography>
           </Section>
         </Box>);
-      
+
       case 'pavilion':
         return (<Box display='flex' flexWrap='wrap'>
           <Section label='Detalle de Intervención' style={{ width: '100%', marginBottom: 30 }}>
             <Typography style={{ whiteSpace: 'pre-line' }}>{(event.data as Pavilion).intervention}</Typography>
           </Section>
           <Section label='Documentos Intervención' style={{ width: '100%', marginBottom: 30 }}>
-              {
-                !!(event.data as Pavilion).docs.length ? (event.data as Pavilion).docs.map((doc) => renderFilePreview(doc)).filter((i) => !!i) : <Typography>Sin documentos</Typography>
-              }
-            </Section>
+            {
+              !!(event.data as Pavilion).docs.length ? (event.data as Pavilion).docs.map((doc) => renderFilePreview(doc)).filter((i) => !!i) : <Typography>Sin documentos</Typography>
+            }
+          </Section>
           <Section label='Detalle de Complicaciones' style={{ width: '100%' }}>
             <Typography style={{ whiteSpace: 'pre-line' }}>{(event.data as Pavilion).complications}</Typography>
           </Section>
         </Box>);
-
+      case 'follow-ups':
+        const followUps: FollowUps = event.data;
+        return (<Box display='flex' flexWrap='wrap'>
+          <Section label={{
+            'two-weeks': 'Control a las 2 semanas',
+            'one-month': 'Control al mes',
+            'three-months': 'Control a los 3 meses',
+            'six-months': 'Control a los 6 meses',
+            'one-year': 'Control al año',
+          }[followUps.term]} style={{ width: '100%', marginBottom: 30 }}>
+            <Typography style={{ whiteSpace: 'pre-line' }}>{followUps.detail}</Typography>
+          </Section>
+          {!!followUps.files.length &&
+            <Section label='Documentos del Control' style={{ width: '100%', marginBottom: 30 }}>
+              {
+                followUps.files.map((file) => renderFilePreview(file)).filter((i) => !!i)
+              }
+            </Section>
+          }
+        </Box>);
       default:
         return <div></div>;
     }
@@ -255,7 +320,7 @@ export const PatientFollowUpScreen = () => {
                   options={Object.entries(eventOptionsDict).map(([key, value]: [string, Dict]) => {
                     return {
                       ...value,
-                      disabled: patient.events.some((event) => event.type === key),
+                      disabled: patient.events.some((event) => event.type === key && event.type !== 'follow-ups'),
                     };
                   })}
                 />
@@ -265,8 +330,8 @@ export const PatientFollowUpScreen = () => {
         </Stepper>
       </Box>
     </Section>
-  </>)
-}
+  </>);
+};
 
 const initialAddStudiesForm = {
   images: [] as File[],
@@ -301,14 +366,14 @@ const AddStudiesModal: React.FC<AddPatientEventModalProps> = ({ patient }) => {
     <>
       <Form form={form} onChange={handleInputChange} id='add-studies-form' onSubmit={onSubmit}>
         <Form.Input label='Arrastra un archivo para subir a estudios' type='file' fullWidth
-          validate={(value) => {
-            if (!value) return 'El campo es requerido';
+          validate={(value: File[]) => {
+            if (!value.length) return 'El campo es requerido';
             return '';
           }}
         />
         <Form.Input label='Arrastra un archivo para subir a exámenes generales' type='file' acceptedFiles={['.pdf']} fullWidth
-          validate={(value) => {
-            if (!value) return 'El campo es requerido';
+          validate={(value: File[]) => {
+            if (!value.length) return 'El campo es requerido';
             return '';
           }}
         />
@@ -346,14 +411,14 @@ const AddBiopsyModal: React.FC<AddPatientEventModalProps> = ({ patient }) => {
     <>
       <Form form={form} onChange={handleInputChange} id='add-biopsy-form' onSubmit={onSubmit}>
         <Form.Input label='Detalle' type='textarea' max={2000} variant='outlined' placeholder='Ingresa detalle' fullWidth
-          validate={(value) => {
+          validate={(value: string) => {
             if (!value) return 'El campo es requerido';
             return '';
           }}
         />
         <Form.Input label='Arrastra un archivo para subir los resultados' type='file' acceptedFiles={['.pdf']} fullWidth
-          validate={(value) => {
-            if (!value) return 'El campo es requerido';
+          validate={(value: File[]) => {
+            if (!value.length) return 'El campo es requerido';
             return '';
           }}
         />
@@ -389,7 +454,7 @@ const AddOncologicalCommitteeModal: React.FC<AddPatientEventModalProps> = ({ pat
     <>
       <Form form={form} onChange={handleInputChange} id='add-oncological-committee-form' onSubmit={onSubmit}>
         <Form.Input label='Detalle' type='textarea' max={2000} variant='outlined' placeholder='Ingresa detalle' fullWidth
-          validate={(value) => {
+          validate={(value: string) => {
             if (!value) return 'El campo es requerido';
             return '';
           }}
@@ -429,20 +494,77 @@ const AddPavilionModal: React.FC<AddPatientEventModalProps> = ({ patient }) => {
     <>
       <Form form={form} onChange={handleInputChange} id='add-pavilion-form' onSubmit={onSubmit}>
         <Form.Input label='Intervención' type='textarea' max={2000} variant='outlined' placeholder='Ingresa detalle de intervención' fullWidth
-          validate={(value) => {
+          validate={(value: string) => {
             if (!value) return 'El campo es requerido';
             return '';
           }}
         />
         <Form.Input label='Arrastra un archivo pdf para adjuntar a las intervenciones' type='file' acceptedFiles={['.pdf']} fullWidth
-          validate={(value) => {
-            if (!value) return 'El campo es requerido';
+          validate={(value: File[]) => {
+            if (!value.length) return 'El campo es requerido';
             return '';
           }}
         />
         <Form.Input label='Complicaciones' type='textarea' max={2000} variant='outlined' placeholder='Ingresa detalle de complicaciones' fullWidth
-          validate={(value) => {
+          validate={(value: string) => {
             if (!value) return 'El campo es requerido';
+            return '';
+          }}
+        />
+      </Form>
+    </>
+  );
+};
+
+const initialAddFollowUps = {
+  term: 'placeholder' as string,
+  detail: '' as string,
+  files: [] as File[],
+};
+
+const AddFollowUpsModal: React.FC<AddPatientEventModalProps> = ({ patient }) => {
+  const { form, handleInputChange } = useForm(initialAddFollowUps);
+  const dispatch = useDispatch();
+
+  const onSubmit = useCallback((form: typeof initialAddFollowUps) => {
+    dispatch(updatePatient({
+      ...patient,
+      events: [...patient.events, ({
+        _id: v4(),
+        type: 'follow-ups',
+        data: {
+          ...form,
+        },
+        datetime: new Date(),
+      } as PatientEvent<FollowUps>)]
+    }));
+    dispatch(closeConfirmModal());
+  }, [dispatch, patient]);
+
+  return (
+    <>
+      <Form form={form} onChange={handleInputChange} id='add-follow-ups-form' onSubmit={onSubmit}>
+        <Form.Input label='Control' type='select' placeholder='Seleccione un lapso de tiempo' fullWidth
+          validate={(value: string) => {
+            if (!value || value === 'placeholder') return 'El campo es requerido';
+            return '';
+          }}
+        >
+          <MenuItem value='two-weeks'>2 semanas</MenuItem>
+          <MenuItem value='one-month'>1 mes</MenuItem>
+          <MenuItem value='three-months'>3 meses</MenuItem>
+          <MenuItem value='six-months'>6 meses</MenuItem>
+          <MenuItem value='one-year'>1 año</MenuItem>
+        </Form.Input>
+        <Form.Input label='Complicaciones' type='textarea' max={2000} variant='outlined' placeholder='Ingresa detalle de complicaciones' fullWidth
+          validate={(value: string) => {
+            if (!value) return 'El campo es requerido';
+            return '';
+          }}
+        />
+        <Form.Input label='Arrastra un archivo pdf para adjuntar al control' type='file' acceptedFiles={['.pdf', 'image/*']} fullWidth
+          validate={(value: File[]) => {
+            if (!value.length && form.term !== 'two-weeks') return 'El campo es requerido';
             return '';
           }}
         />

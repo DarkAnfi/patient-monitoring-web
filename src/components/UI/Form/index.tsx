@@ -27,8 +27,8 @@ interface FormPrefix {
 const Form: React.ForwardRefExoticComponent<React.PropsWithoutRef<FormProps> & React.RefAttributes<FormAttributes>> & FormPrefix = React.forwardRef<FormAttributes, FormProps>(({ onSubmit, onChange, form, error, helper, showBottomError = false, children, ...rest }, ref) => {
   const formerror = useRef<Dict<string>>({});
   const _form = Object.entries(form);
-  const [flag, setFlag] = useState(false);
-  const reset = () => setFlag(!flag);
+  const [, setFlag] = useState(false);
+  const reset = useCallback(() => setFlag((flag) => !flag), []);
   const inputsref = useRef<Dict>({});
   const validate = useCallback(() => {
     Object.values(inputsref.current).forEach(input => {
@@ -45,13 +45,13 @@ const Form: React.ForwardRefExoticComponent<React.PropsWithoutRef<FormProps> & R
       if (typeof form[key] === 'string') form[key] = form[key].trim();
     });
     return flagError;
-  }, []);
+  }, [form, reset]);
   useImperativeHandle(
     ref,
     () => ({
       validate
     }),
-    [],
+    [validate],
   );
   const _onSubmit: React.FormEventHandler<HTMLFormElement> | undefined = !!onSubmit ? (event) => {
     event.preventDefault();

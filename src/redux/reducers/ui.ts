@@ -5,7 +5,7 @@ const isDarkActive: boolean = JSON.parse(localStorage.getItem('isDarkActive') ??
 
 const initialState: UIState = {
     isDarkActive,
-    isMainMenuOpen: false,
+    isMainMenuOpen: true,
     breadcrumbs: [],
     snackbars: [],
     infoModal: {

@@ -17,4 +17,3 @@ export const API_HOST = NODE_ENV === 'production' ? PROD_API_HOST : NODE_ENV ===
 export const API_PORT = NODE_ENV === 'production' ? PROD_API_PORT : NODE_ENV === 'development' ? DEV_API_PORT : LOCAL_API_PORT;
 
 export const API_URL = `${API_HTTP}://${API_HOST}${!!API_PORT ? ':' : ''}${API_PORT}/v1`;
-export const SOCKET_URL = `${API_HTTP}://${API_HOST}${!!API_PORT ? ':' : ''}${API_PORT}`;

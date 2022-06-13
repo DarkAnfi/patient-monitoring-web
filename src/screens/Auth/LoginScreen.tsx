@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         minHeight: '100vh',
-        backgroundColor: theme.palette.background.paper,
+        // backgroundColor: theme.palette.background.paper,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'right bottom',
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         width: '50%',
         padding: '20px 40px',
-        backgroundColor: theme.palette.background.default,
+        // backgroundColor: theme.palette.background.default,
         [theme.breakpoints.down('xs')]: {
             width: '90%',
         },

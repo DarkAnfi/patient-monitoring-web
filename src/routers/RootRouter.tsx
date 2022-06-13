@@ -9,6 +9,11 @@ import { AuthRouter } from 'routers/AuthRouter';
 import { AppRouter } from './AppRouter';
 import { useNotifier } from 'hooks/useNotifier';
 import { SplashScreen } from 'screens/SplashScreen';
+import { createPatientEvent } from 'redux/actions/patients';
+import { v4 } from 'uuid';
+import study1 from '../assets/docs/study-1.png';
+import study2 from '../assets/docs/study-2.png';
+import biopsy from '../assets/docs/biopsy.png';
 
 export const RootRouter: React.FC = () => {
     useStyles();
@@ -18,6 +23,32 @@ export const RootRouter: React.FC = () => {
 
     useEffect(() => {
         dispatch(checkingToken());
+        dispatch<AsyncAction>(async (dispatch) => {
+            dispatch(createPatientEvent<Studies>('2', {
+                _id: v4(),
+                type: 'studies',
+                data: {
+                    images: [
+                        await fetch(study1).then(res => res.arrayBuffer()).then(buf => new File([buf], 'study-1.png', { type: 'image/png' })),
+                        await fetch(study2).then(res => res.arrayBuffer()).then(buf => new File([buf], 'study-2.png', { type: 'image/png' })),
+                    ],
+                    exams: [],
+                },
+                datetime: new Date(),
+            }));
+            dispatch(createPatientEvent<Biopsy>('2', {
+                _id: v4(),
+                type: 'biopsy',
+                data: {
+                    detail: `RESUMEN biopsia: La lesión está representada por una proliferación de células fusadas de localización intertrabecular, con baja atipía citológica, sin formación de osteoide, positivas en inmunotinciones CDK4 y SatB2. Estos hallazgos morfológicos e inmunohistoquímicos, sumados a los hallazgos clínicos e imagenológicos, permiten favorecer el diagnóstico de osteosarcoma.
+Estudio inmunoihstoquímnico recibido el 22-04-2022. La inmunotinción MDM2 se encuentra pendiente al momento de emisión de este informe (será informada en documento posterior).`,
+                    results: [
+                        await fetch(biopsy).then(res => res.arrayBuffer()).then(buf => new File([buf], 'biopsy.png', { type: 'image/png' })),
+                    ]
+                },
+                datetime: new Date(),
+            }));
+        });
     }, [dispatch]);
 
     useEffect(() => {

@@ -46,14 +46,7 @@ interface Pavilion {
 }
 
 interface FollowUps {
-  controlTwoWeeks: MedicalControl;
-  controlOneMonth: MedicalControl;
-  controlThreeMonths: MedicalControl;
-  controlSixMonths: MedicalControl;
-  controlOneYear: MedicalControl;
-}
-
-interface MedicalControl {
+  term: 'two-weeks'|'one-month'|'three-months'|'six-months'|'one-year';
   detail: string;
-  files?: [];
+  files: [];
 }
