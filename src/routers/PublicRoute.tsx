@@ -5,5 +5,5 @@ export const PublicRoute: React.FC<RouteProps> = ({
     ...rest
 }) => {
     if(!isAuthenticated) return (<Route {...rest} />);
-    else return (<Redirect to='/app/home' />);
+    else return (<Redirect to='/patient-monitoring-web/app/home' />);
 };

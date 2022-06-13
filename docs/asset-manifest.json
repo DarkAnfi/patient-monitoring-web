@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/patient-monitoring-web/static/css/main.d46750a5.css",
-    "main.js": "/patient-monitoring-web/static/js/main.72d93aa9.js",
+    "main.js": "/patient-monitoring-web/static/js/main.ac44d837.js",
     "pdfmake.js": "/patient-monitoring-web/static/js/pdfmake.882b2da4.chunk.js",
     "canvg.js": "/patient-monitoring-web/static/js/canvg.5b47cbb7.chunk.js",
     "xlsx.js": "/patient-monitoring-web/static/js/xlsx.49da9dfc.chunk.js",
@@ -16,7 +16,7 @@
     "index.html": "/patient-monitoring-web/index.html"
   },
   "entrypoints": [
-    "/patient-monitoring-web/static/css/main.d46750a5.css",
-    "/patient-monitoring-web/static/js/main.72d93aa9.js"
+    "static/css/main.d46750a5.css",
+    "static/js/main.ac44d837.js"
   ]
 }

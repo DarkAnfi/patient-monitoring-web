@@ -67,9 +67,9 @@ Estudio inmunoihstoquímnico recibido el 22-04-2022. La inmunotinción MDM2 se e
     return (
         <div>
             <Switch>
-                <PublicRoute path='/auth' component={AuthRouter} isAuthenticated={isAuth} />
-                <PrivateRoute path='/app' component={AppRouter} isAuthenticated={isAuth} />
-                <Redirect to='/auth/login' />
+                <PublicRoute path='/patient-monitoring-web/auth' component={AuthRouter} isAuthenticated={isAuth} />
+                <PrivateRoute path='/patient-monitoring-web/app' component={AppRouter} isAuthenticated={isAuth} />
+                <Redirect to='/patient-monitoring-web/auth/login' />
             </Switch>
         </div>
     );

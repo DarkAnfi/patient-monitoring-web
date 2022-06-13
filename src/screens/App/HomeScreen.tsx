@@ -75,7 +75,7 @@ export const HomeScreen: React.FC = () => {
     }, [dispatch]);
 
     const onNavigate = useCallback((row: Row) => {
-        history.push(`/app/patient-follow-up/${row._id}`);
+        history.push(`/patient-monitoring-web/app/patient-follow-up/${row._id}`);
     }, [history]);
 
     const headersTable = {
