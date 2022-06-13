@@ -5,5 +5,5 @@ export const PrivateRoute: React.FC<RouteProps> = ({
     ...rest
 }) => {
     if(isAuthenticated) return (<Route {...rest} />);
-    else return (<Redirect to='/patient-monitoring-web/auth/login' />);
+    else return (<Redirect to='/auth/login' />);
 };

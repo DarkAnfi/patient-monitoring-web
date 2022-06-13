@@ -131,7 +131,7 @@ export const PatientFollowUpScreen = () => {
     };
   }, [onAddStudies, onAddBiopsy, onAddOncologicalCommittee, onAddPavilion, onAddFollowUps]);
 
-  if (!patient || (!!patient && !patient.events.length)) return <Redirect to={'/patient-monitoring-web/app/home'} />;
+  if (!patient || (!!patient && !patient.events.length)) return <Redirect to={'/app/home'} />;
 
   const renderStepperTitle = (event: PatientEvent) => {
 

@@ -5,8 +5,8 @@ export const AuthRouter: React.FC = () => {
     return (
         <div>
             <Switch>
-                <Route exact path='/patient-monitoring-web/auth/login' component={LoginScreen} />
-                <Redirect to='/patient-monitoring-web/auth/login' />
+                <Route exact path='/auth/login' component={LoginScreen} />
+                <Redirect to='/auth/login' />
             </Switch>
         </div>
     );

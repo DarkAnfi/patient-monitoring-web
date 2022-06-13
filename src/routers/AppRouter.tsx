@@ -58,9 +58,9 @@ export const AppRouter: React.FC = () => {
                     <BreadcrumbsCustom />
                     <div style={paddingEnable ? { paddingTop: 20, paddingLeft: 20, paddingRight: 20, paddingBottom: 40 } : {}}>
                         <Switch>
-                            <Route exact path='/patient-monitoring-web/app/home' component={HomeScreen} />
-                            <Route exact path='/patient-monitoring-web/app/patient-follow-up/:patientId' component={PatientFollowUpScreen} />
-                            <Redirect to='/patient-monitoring-web/app/home' />
+                            <Route exact path='/app/home' component={HomeScreen} />
+                            <Route exact path='/app/patient-follow-up/:patientId' component={PatientFollowUpScreen} />
+                            <Redirect to='/app/home' />
                         </Switch>
                     </div>
                 </div>

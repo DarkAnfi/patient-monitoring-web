@@ -36,7 +36,7 @@ export const Sidebar: React.FC = () => {
                     <ListItem
                         style={{ height: 56 }}
                         component={Link}
-                        to='/patient-monitoring-web/app/home'
+                        to='/app/home'
                         button
                     >
                         <ListItemIcon>
