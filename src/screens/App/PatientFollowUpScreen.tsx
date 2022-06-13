@@ -9,7 +9,7 @@ import { ButtonMenu } from 'components/UI/ButtonMenu';
 import { closeConfirmModal, enqueueSnackbar, openConfirmModal, setConfirmModalState } from 'redux/actions/ui';
 import { Form } from 'components/UI/Form';
 import { useForm } from 'hooks/useForm';
-import { deletePatientEvent, updatePatient, updatePatientEvent } from '../../redux/actions/patients';
+import { deletePatientEvent, updatePatient } from '../../redux/actions/patients';
 import { v4 } from 'uuid';
 import { Delete, Edit } from '@material-ui/icons';
 
@@ -347,7 +347,7 @@ const AddStudiesModal: React.FC<AddPatientEventModalProps> = ({ patient }) => {
   const dispatch = useDispatch();
 
   const onSubmit = useCallback((form: typeof initialAddStudiesForm) => {
-    if (!form.images.length || !form.exams.length) return dispatch(enqueueSnackbar({ message: `Los archivos son requeridos`, options: { variant: 'error', autoHideDuration: 5000 } }));
+    if (!form.images.length && !form.exams.length) return dispatch(enqueueSnackbar({ message: `Los archivos son requeridos`, options: { variant: 'error', autoHideDuration: 5000 } }));
     dispatch(updatePatient({
       ...patient,
       events: [...patient.events, ({
@@ -367,13 +367,13 @@ const AddStudiesModal: React.FC<AddPatientEventModalProps> = ({ patient }) => {
       <Form form={form} onChange={handleInputChange} id='add-studies-form' onSubmit={onSubmit}>
         <Form.Input label='Arrastra un archivo para subir a estudios' type='file' fullWidth
           validate={(value: File[]) => {
-            if (!value.length) return 'El campo es requerido';
+            if (!value.length && !form.exams.length) return 'El campo es requerido';
             return '';
           }}
         />
         <Form.Input label='Arrastra un archivo para subir a exámenes generales' type='file' acceptedFiles={['.pdf']} fullWidth
           validate={(value: File[]) => {
-            if (!value.length) return 'El campo es requerido';
+            if (!value.length && !form.images.length) return 'El campo es requerido';
             return '';
           }}
         />
@@ -562,7 +562,7 @@ const AddFollowUpsModal: React.FC<AddPatientEventModalProps> = ({ patient }) => 
             return '';
           }}
         />
-        <Form.Input label='Arrastra un archivo pdf para adjuntar al control' type='file' acceptedFiles={['.pdf', 'image/*']} fullWidth
+        <Form.Input label='Arrastra una imagen o archivo pdf para adjuntar al control' type='file' acceptedFiles={['.pdf', 'image/*']} fullWidth
           validate={(value: File[]) => {
             if (!value.length && form.term !== 'two-weeks') return 'El campo es requerido';
             return '';

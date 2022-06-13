@@ -79,11 +79,11 @@ export const HomeScreen: React.FC = () => {
     }, [history]);
 
     const headersTable = {
-        name: { type: 'text', label: 'Nombre', width: 300 },
+        name: { type: 'text', label: 'Nombre', flex: 1 },
         age: { type: 'text', label: 'Edad', width: 88 },
         prevision: { type: 'text', label: 'Previsión', width: 116 },
         derivedFrom: { type: 'text', label: 'Derivado desde', width: 300 },
-        reason: { type: 'text', label: 'Razón derivación', flex: 1 },
+        // reason: { type: 'text', label: 'Razón derivación', flex: 1 },
         actions: {
             type: 'actions',
             buttons: [

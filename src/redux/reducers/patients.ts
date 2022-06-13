@@ -7,11 +7,11 @@ const initialState: PatientState = {
             _id: '2',
             name: 'Cristian Lopez Covili',
             age: 37,
-            history: `TIENE EVALUACIONES CLINICAS Y DE MAGENES EN DESDE ENERO 2022 (PENDIENTES DE INFORME RADIOLOGICO)`,
+            history: `Tiene evaluaciones clinicas y de magenes en desde enero 2022 (pendientes de informe radiologico)`,
             prevision: 'Fonasa D',
-            derivedFrom: 'EVALUADO EN HHHA 15/03',
-            reason: 'CUADRO DE AUMENTO DE VOLUMEN EN CARA MEDIAL MUSLO IZQUIERDO DESDE NOVIEMBRE 2021, ASOCIADO A CRECIMIENTO GRADUAL Y DOLOR',
-            observation: `ES EVALUADO A APS Y DERIVADO PARA EVALUACIÓN EQUIPO TRAUMATOLOGIA TUMORES. SE INGRESA A LISTA ESTERA QUIRURGICA PARA BIOPSIA LESION`,
+            derivedFrom: 'Evaluado en HHHA 15/03',
+            reason: 'Cuadro de aumento de volumen en cara medial muslo izquierdo desde noviembre 2021, asociado a crecimiento gradual y dolor',
+            observation: `Es evaluado a aps y derivado para evaluación equipo traumatologia tumores. se ingresa a lista estera quirurgica para biopsia lesion`,
             events: [
                 {
                     _id: '1',

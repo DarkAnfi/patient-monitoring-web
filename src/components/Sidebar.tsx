@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Box, Divider, Drawer, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
+import { Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles } from '@material-ui/core';
 import { toggleMainMenu } from 'redux/actions/ui';
-// import { ReactComponent as Logo } from 'assets/img/logos/logo_drawer.svg';
-// import { ChevronLeft } from '@material-ui/icons';
+import { Home } from '@material-ui/icons';
+import logoDrawer from 'assets/img/logos/logo-drawer.png';
 
 export const Sidebar: React.FC = () => {
     const classes = useStyles();
@@ -26,8 +26,8 @@ export const Sidebar: React.FC = () => {
         >
             <List className={classes.root}>
                 <Box className={classes.drawerHeader} display='flex' alignItems='center' justifyContent='space-between' height='64px' paddingLeft='10px' paddingRight='10px'>
-                    {/* <Logo className={classes.logo} />
-                    <IconButton onClick={handleToggleDrawer}>
+                    <img className={classes.logo} src={logoDrawer} alt='logo-drawer'/>
+                    {/* <IconButton onClick={handleToggleDrawer}>
                         <ChevronLeft />
                     </IconButton> */}
                 </Box>
@@ -39,6 +39,9 @@ export const Sidebar: React.FC = () => {
                         to='/app/home'
                         button
                     >
+                        <ListItemIcon>
+                            <Home />
+                        </ListItemIcon>
                         <ListItemText classes={{ primary: classes.bold }} primary='Inicio' />
                     </ListItem>
                 </Box>
@@ -57,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     logo: {
-        // margin: '10px 10px',
+        margin: 'auto',
         width: 130,
         height: 43,
         fill: theme.palette.primary.main,
