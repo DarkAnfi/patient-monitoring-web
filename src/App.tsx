@@ -36,7 +36,7 @@ const App = () => {
       >
         <MuiPickersUtilsProvider locale={es} utils={DateFnsUtils}>
           <CssBaseline />
-          <Router>
+          <Router basename={'/patient-monitoring-web'}>
             <RootRouter />
           </Router>
         </MuiPickersUtilsProvider>
