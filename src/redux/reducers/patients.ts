@@ -5,10 +5,10 @@ const initialState: PatientState = {
     patients: [
         {
             _id: '2',
-            name: 'Cristian Lopez Covili',
-            age: 37,
+            name: 'Maria Fernanda Sanhueza',
+            age: 32,
             history: `Tiene evaluaciones clinicas y de magenes en desde enero 2022 (pendientes de informe radiologico)`,
-            prevision: 'Fonasa D',
+            prevision: 'Fonasa B',
             derivedFrom: 'Evaluado en HHHA 15/03',
             reason: 'Cuadro de aumento de volumen en cara medial muslo izquierdo desde noviembre 2021, asociado a crecimiento gradual y dolor',
             observation: `Es evaluado a aps y derivado para evaluación equipo traumatologia tumores. se ingresa a lista estera quirurgica para biopsia lesion`,
