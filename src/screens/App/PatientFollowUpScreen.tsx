@@ -60,6 +60,26 @@ export const PatientFollowUpScreen = () => {
     dispatch(openConfirmModal());
   }, [dispatch, patient]);
 
+  const onAddDiagnostic = useCallback(() => {
+    if (!patient) return;
+    dispatch(setConfirmModalState({
+      title: 'Agregar Diagnostico',
+      fullWidth: true,
+      size: 'sm',
+      content: <AddDiagnosticModal patient={patient} />,
+      onConfirm: () => {
+        const form = document.querySelector<HTMLFormElement>(`#add-diagnostic-form`);
+        if (!form) return false;
+        form.dispatchEvent(new Event('submit', {
+          'bubbles': true,
+          'cancelable': true,
+        }));
+        return false;
+      }
+    }));
+    dispatch(openConfirmModal());
+  }, [dispatch, patient]);
+
   const onAddOncologicalCommittee = useCallback(() => {
     if (!patient) return;
     dispatch(setConfirmModalState({
@@ -125,11 +145,12 @@ export const PatientFollowUpScreen = () => {
       'entry': { label: 'Ingreso', onSelect: () => console.log('entry') },
       'studies': { label: 'Estudios', onSelect: onAddStudies },
       'biopsy': { label: 'Biopsia', onSelect: onAddBiopsy },
+      'diagnostic': { label: 'Comité Oncológico', onSelect: onAddDiagnostic },
       'oncological-committee': { label: 'Comité Oncológico', onSelect: onAddOncologicalCommittee },
       'pavilion': { label: 'Pabellón', onSelect: onAddPavilion },
       'follow-ups': { label: 'Seguimiento', onSelect: onAddFollowUps },
     };
-  }, [onAddStudies, onAddBiopsy, onAddOncologicalCommittee, onAddPavilion, onAddFollowUps]);
+  }, [onAddStudies, onAddBiopsy, onAddDiagnostic, onAddOncologicalCommittee, onAddPavilion, onAddFollowUps]);
 
   if (!patient || (!!patient && !patient.events.length)) return <Redirect to={'/app/home'} />;
 
@@ -227,6 +248,13 @@ export const PatientFollowUpScreen = () => {
           </Section>
           <Section label='Resultados' style={{ width: '100%' }}>
             {(event.data as Biopsy).results.map((result) => renderFilePreview(result)).filter((i) => !!i)}
+          </Section>
+        </Box>);
+
+      case 'diagnostic':
+        return (<Box display='flex' flexWrap='wrap'>
+          <Section label='Detalle Diagnostico' style={{ width: '100%' }}>
+            <Typography style={{ whiteSpace: 'pre-line' }}>{(event.data as Diagnostic).detail}</Typography>
           </Section>
         </Box>);
 
@@ -419,6 +447,43 @@ const AddBiopsyModal: React.FC<AddPatientEventModalProps> = ({ patient }) => {
         <Form.Input label='Arrastra un archivo para subir los resultados' type='file' acceptedFiles={['.pdf']} fullWidth
           validate={(value: File[]) => {
             if (!value.length) return 'El campo es requerido';
+            return '';
+          }}
+        />
+      </Form>
+    </>
+  );
+};
+
+const initialAddDiagnostic = {
+  detail: '' as string,
+};
+
+const AddDiagnosticModal: React.FC<AddPatientEventModalProps> = ({ patient }) => {
+  const { form, handleInputChange } = useForm(initialAddBiopsy);
+  const dispatch = useDispatch();
+
+  const onSubmit = useCallback((form: typeof initialAddDiagnostic) => {
+    dispatch(updatePatient({
+      ...patient,
+      events: [...patient.events, ({
+        _id: v4(),
+        type: 'diagnostic',
+        data: {
+          ...form,
+        },
+        datetime: new Date(),
+      } as PatientEvent<Diagnostic>)]
+    }));
+    dispatch(closeConfirmModal());
+  }, [dispatch, patient]);
+
+  return (
+    <>
+      <Form form={form} onChange={handleInputChange} id='add-diagnostic-form' onSubmit={onSubmit}>
+        <Form.Input label='Detalle' type='textarea' max={2000} variant='outlined' placeholder='Ingresa detalle' fullWidth
+          validate={(value: string) => {
+            if (!value) return 'El campo es requerido';
             return '';
           }}
         />

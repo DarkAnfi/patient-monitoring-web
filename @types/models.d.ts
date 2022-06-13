@@ -20,7 +20,7 @@ interface Patient {
 
 interface PatientEvent<T = any> {
   _id: string;
-  type: 'entry' | 'studies' | 'biopsy' | 'oncological-committee' | 'pavilion' | 'follow-ups';
+  type: 'entry' | 'studies' | 'biopsy'| 'diagnostic' | 'oncological-committee' | 'pavilion' | 'follow-ups';
   data: T;
   datetime: Date;
 }
@@ -33,6 +33,10 @@ interface Studies {
 interface Biopsy {
   detail: string;
   results: File[];
+}
+
+interface Diagnostic {
+  detail: string;
 }
 
 interface OncologicalCommittee {
