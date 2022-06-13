@@ -145,7 +145,7 @@ export const PatientFollowUpScreen = () => {
       'entry': { label: 'Ingreso', onSelect: () => console.log('entry') },
       'studies': { label: 'Estudios', onSelect: onAddStudies },
       'biopsy': { label: 'Biopsia', onSelect: onAddBiopsy },
-      'diagnostic': { label: 'Comité Oncológico', onSelect: onAddDiagnostic },
+      'diagnostic': { label: 'Diagnostico', onSelect: onAddDiagnostic },
       'oncological-committee': { label: 'Comité Oncológico', onSelect: onAddOncologicalCommittee },
       'pavilion': { label: 'Pabellón', onSelect: onAddPavilion },
       'follow-ups': { label: 'Seguimiento', onSelect: onAddFollowUps },
